@@ -16,3 +16,6 @@ Interesting things you can do with this include:
 - slope detection (ditto)
 - mean, variance, quantiles, and other values computable from the distribution (and changes/slopes of these)
 - decayed unique values (have N keys in the same group for buckets of an HLL counter, compute the 99.9th percentile as the max)
+
+----
+It would be interesting to implement against a backing store which had atomic increments, using 3 atomic counters for each decaying counter - at any one time, one of them would get most of the writes, with some falling into the second, and then eventually the second and third get merged and a new one created (when it's been enough halflives that precision is in danger).
